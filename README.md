@@ -49,7 +49,7 @@
 * запустим контроллер робота командой
 
 ```bash
-roslaunch widowx_arm_controller widowx_arm_controller.launch 
+roslaunch widowx_arm_controller widowx_arm_controller.launch
 ```
 
 * подадим команды для установки серв в заданные положения

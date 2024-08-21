@@ -12,7 +12,14 @@
    </joint-->
 
    <xacro:macro name="widowx_arm" params="parent prefix *origin">
-      <!-- links -->
+
+      <!-- arm_base_link -->
+      <joint name="${prefix}arm_base_joint" type="fixed">
+         <xacro:insert_block name="origin" />
+         <parent link="${parent}" />
+         <child link="${prefix}arm_base_link"/>
+      </joint>
+
       <link name="${prefix}arm_base_link">
          <visual>
             <origin xyz="0 0 0" rpy="0 0 0" />
@@ -20,7 +27,7 @@
                <mesh filename="package://widowx_arm_description/meshes/base_link.stl"/>
             </geometry>
             <xacro:material_black />
-	     </visual>
+         </visual>
          <collision>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
@@ -33,6 +40,16 @@
             <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
          </inertial>
       </link>
+
+      <!-- shoulder_link -->
+      <joint name="${prefix}joint_1" type="revolute">
+         <origin xyz="0 0 ${M_SCALE*125}" rpy="0 0 0" />
+         <parent link="${prefix}arm_base_link" />
+         <child link="${prefix}shoulder_link" />
+         <axis xyz="0 0 1" />
+         <limit lower="-2.617" upper="2.617" effort="6" velocity="0.785" />
+      </joint>
+
       <link name="${prefix}shoulder_link">
          <visual>
             <origin xyz="0 0 0" rpy="0 0 0" />
@@ -53,6 +70,17 @@
             <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
          </inertial>
       </link>
+
+      <!-- biceps_link -->
+      <joint name="${prefix}joint_2" type="revolute">
+         <!--origin xyz="0.04825 0 0.14203" rpy="0 0 0" /-->
+         <origin xyz="0 0 0" rpy="0 0 0" />
+         <parent link="${prefix}shoulder_link" />
+         <child link="${prefix}biceps_link" />
+         <axis xyz="0 1 0" />
+         <limit lower="-1.571" upper="1.571" effort="6" velocity="1.571" />
+      </joint>
+
       <link name="${prefix}biceps_link">
          <visual>
             <origin xyz="0 0 0" rpy="0 0 0" />
@@ -73,6 +101,16 @@
             <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
          </inertial>
       </link>
+
+      <!-- forearm_link -->
+      <joint name="${prefix}joint_3" type="revolute">
+         <origin xyz="${M_SCALE*48.25} 0 ${M_SCALE*142.03}" rpy="0 ${M_PI/2.0} 0" />
+         <parent link="${prefix}biceps_link" />
+         <child link="${prefix}forearm_link" />
+         <axis xyz="0 1 0" />
+         <limit lower="-1.571" upper="1.571" effort="6" velocity="1.571" />
+      </joint>
+
       <link name="${prefix}forearm_link">
          <visual>
             <origin xyz="0 0 0" rpy="0 0 0" />
@@ -93,6 +131,16 @@
             <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
          </inertial>
       </link>
+
+      <!-- wrist_1_link -->
+      <joint name="${prefix}joint_4" type="revolute">
+         <origin xyz="0 0 ${M_SCALE*142.03}" rpy="0 0 0" />
+         <parent link="${prefix}forearm_link" />
+         <child link="${prefix}wrist_1_link" />
+         <axis xyz="0 1 0" />
+         <limit lower="-1.745" upper="1.745" effort="6" velocity="1.571" />
+      </joint>
+
       <link name="${prefix}wrist_1_link">
          <visual>
             <origin xyz="0 0 0" rpy="0 0 0" />
@@ -113,6 +161,16 @@
             <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
          </inertial>
       </link>
+
+      <!-- wrist_2_link -->
+      <joint name="${prefix}joint_5" type="revolute">
+         <origin xyz="0 0 ${M_SCALE*71.5}" rpy="0 0 0" />
+         <parent link="${prefix}wrist_1_link" />
+         <child link="${prefix}wrist_2_link" />
+         <axis xyz="0 0 1" />
+         <limit lower="-2.617" upper="2.617" effort="6" velocity="1.571" />
+      </joint>
+
       <link name="${prefix}wrist_2_link">
          <visual>
             <origin xyz="0 0 0" rpy="0 0 0" />
@@ -133,6 +191,7 @@
             <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
          </inertial>
       </link>
+
       <!--link name="${prefix}gripper_rail_link">
          <visual>
             <origin xyz="0 0 0" rpy="0 0 1.57" />
@@ -153,8 +212,10 @@
             <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
          </inertial>
       </link-->
+
       <!--link name="${prefix}gripper_aux_link">
       </link-->
+
       <!--link name="${prefix}gripper_1_link">
          <visual>
             <origin xyz="0 -0.0007 0" rpy="0 0 1.57" />
@@ -175,6 +236,7 @@
             <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
          </inertial>
       </link>
+
       <link name="${prefix}gripper_2_link">
          <visual>
             <origin xyz="0 0.0007 0" rpy="0 0 -1.57" />
@@ -195,48 +257,7 @@
             <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
          </inertial>
       </link-->
-      <!-- joints -->
-      <joint name="${prefix}arm_base_joint" type="fixed">
-         <xacro:insert_block name="origin" />
-         <parent link="${parent}" />
-         <child link="${prefix}arm_base_link"/>
-      </joint>
-      <joint name="${prefix}joint_1" type="revolute">
-         <origin xyz="0 0 ${M_SCALE*125}" rpy="0 0 0" />
-         <parent link="${prefix}arm_base_link" />
-         <child link="${prefix}shoulder_link" />
-         <axis xyz="0 0 1" />
-         <limit lower="-2.617" upper="2.617" effort="6" velocity="0.785" />
-      </joint>
-      <joint name="${prefix}joint_2" type="revolute">
-         <!--origin xyz="0.04825 0 0.14203" rpy="0 0 0" /-->
-         <origin xyz="0 0 0" rpy="0 0 0" />
-         <parent link="${prefix}shoulder_link" />
-         <child link="${prefix}biceps_link" />
-         <axis xyz="0 1 0" />
-         <limit lower="-1.571" upper="1.571" effort="6" velocity="1.571" />
-      </joint>
-      <joint name="${prefix}joint_3" type="revolute">
-         <origin xyz="${M_SCALE*48.25} 0 ${M_SCALE*142.03}" rpy="0 ${M_PI/2.0} 0" />
-         <parent link="${prefix}biceps_link" />
-         <child link="${prefix}forearm_link" />
-         <axis xyz="0 1 0" />
-         <limit lower="-1.571" upper="1.571" effort="6" velocity="1.571" />
-      </joint>
-      <joint name="${prefix}joint_4" type="revolute">
-         <origin xyz="0 0 ${M_SCALE*142.03}" rpy="0 0 0" />
-         <parent link="${prefix}forearm_link" />
-         <child link="${prefix}wrist_1_link" />
-         <axis xyz="0 1 0" />
-         <limit lower="-1.745" upper="1.745" effort="6" velocity="1.571" />
-      </joint>
-      <joint name="${prefix}joint_5" type="revolute">
-         <origin xyz="0 0 ${M_SCALE*71.5}" rpy="0 0 0" />
-         <parent link="${prefix}wrist_1_link" />
-         <child link="${prefix}wrist_2_link" />
-         <axis xyz="0 0 1" />
-         <limit lower="-2.617" upper="2.617" effort="6" velocity="1.571" />
-      </joint>
+
       <!--joint name="${prefix}joint_6" type="fixed">
          <origin xyz = "0 0 ${M_SCALE*43}" rpy="0 0 0" />
          <parent link="${prefix}wrist_2_link" />
@@ -244,6 +265,7 @@
          <axis xyz="0 0 1" />
          <limit lower="-0.31" upper="0.1" effort="6" velocity="0.5" />
       </joint-->
+
       <!--joint name="${prefix}gripper_revolute_joint" type="revolute">
          <origin xyz = "0 0 0.065" rpy="0 0 0" />
          <parent link="${prefix}wrist_2_link" />
@@ -251,6 +273,7 @@
          <axis xyz="0 0 1" />
          <limit lower="-2.6" upper="2.6" effort="6" velocity="0.5" />
       </joint-->
+
       <!--joint name="${prefix}gripper_prismatic_joint_1" type="prismatic">
          <origin xyz="0 0 0" rpy="0 0 0" />
          <parent link="${prefix}gripper_rail_link" />
@@ -258,6 +281,7 @@
          <axis xyz="0 -1 0" />
          <limit lower="0" upper="0.027" effort="6" velocity="0.5" />
       </joint>
+
       <joint name="${prefix}gripper_prismatic_joint_2" type="prismatic">
          <origin xyz="0 0 0" rpy="0 0 0" />
          <parent link="${prefix}gripper_rail_link" />
@@ -268,16 +292,16 @@
       </joint-->
 
       <!-- gripper -->
-  <xacro:include filename="$(find widowx_arm_description)/urdf/widowx_gripper.xacro"/>
+      <xacro:include filename="$(find widowx_arm_description)/urdf/widowx_gripper.xacro"/>
 
-  <!--link name="gripper_link"/>
-    <joint name="gripper_link_joint" type="revolute">
-      <origin xyz="0 0 0.110" rpy="0 0 0"/>
-      <parent link="${prefix}wrist_1_link" />
-      <child link="gripper_link"/>
-      <limit effort="6" velocity="1" lower="-3.14" upper="3.14"/>
-      <axis xyz="1 0 0"/>
-    </joint-->
+      <!--link name="gripper_link"/>
+      <joint name="gripper_link_joint" type="revolute">
+         <origin xyz="0 0 0.110" rpy="0 0 0"/>
+         <parent link="${prefix}wrist_1_link" />
+         <child link="gripper_link"/>
+         <limit effort="6" velocity="1" lower="-3.14" upper="3.14"/>
+         <axis xyz="1 0 0"/>
+      </joint-->
 
    </xacro:macro>
 
