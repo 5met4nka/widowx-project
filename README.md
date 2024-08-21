@@ -17,6 +17,12 @@
 
 ## начало работы
 
+* установим бинарные пакеты командой
+
+    ```bash
+    sh src/widowx-project/scripts/install_binary_packages.sh
+    ```
+
 * в папке `src` выполним команду, которая установит все зависимости
 
     ```bash
@@ -29,26 +35,16 @@
 * соберем пакеты командой
 
     ```bash
-    catkin build
+    sh src/widowx-project/scripts/build.sh
     ```
 
 * добавим устойство `ttyUSB_WIDOWX`
 
     ```bash
-    sudo cp $(rospack find widowx_arm_controller)/config/58-widowx.rules /etc/udev/rules.d
+    sudo sh src/widowx-project/scripts/install_hardware_moduls.sh
     ```
 
-    ```bash
-    sudo service udev reload
-    ```
-
-    ```bash
-    sudo service udev restart
-    ```
-
-    ```bash
-    sudo udevadm trigger
-    ```
+    * после выполнения этой команды необходимо переподключить устройство!
 
 * запустим контроллер робота командой
 
