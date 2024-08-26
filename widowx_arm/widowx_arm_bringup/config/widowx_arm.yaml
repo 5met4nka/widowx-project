@@ -1,5 +1,5 @@
 source: widowx_arm.yaml
-port: /dev/ttyUSB0
+port: /dev/ttyWIDOWX
 read_rate: 50
 write_rate: 50
 
