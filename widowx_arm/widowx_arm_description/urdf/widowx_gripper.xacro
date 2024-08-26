@@ -3,13 +3,13 @@
 
    <!-- gripper_rail_link -->
 
-   <joint name="${prefix}joint_6" type="fixed">
+   <joint name="joint_6" type="fixed">
       <origin xyz = "0 0 ${M_SCALE*43}" rpy="0 0 0" />
-      <parent link="${prefix}wrist_2_link" />
-      <child link="${prefix}gripper_rail_link" />
+      <parent link="wrist_2_link" />
+      <child link="gripper_rail_link" />
       <axis xyz="0 0 1" />
    </joint>
-   <link name="${prefix}gripper_rail_link">
+   <link name="gripper_rail_link">
       <visual>
          <origin xyz="0 0 0" rpy="0 0 1.57" />
          <geometry>
@@ -38,18 +38,18 @@
       </actuator>
    </transmission>
 
-   <!--link name="${prefix}gripper_aux_link">
+   <!--link name="gripper_aux_link">
    </link-->
 
    <!-- gripper_1_link -->
-   <joint name="${prefix}gripper_joint" type="prismatic">
+   <joint name="gripper_joint" type="prismatic">
       <origin xyz="0 0 0" rpy="0 0 0" />
-      <parent link="${prefix}gripper_rail_link" />
-      <child link="${prefix}gripper_1_link" />
+      <parent link="gripper_rail_link" />
+      <child link="gripper_1_link" />
       <axis xyz="0 -1 0" />
       <limit lower="0.002" upper="0.031" effort="0" velocity="0.5" />
    </joint>
-   <link name="${prefix}gripper_1_link">
+   <link name="gripper_1_link">
       <visual>
          <origin xyz="0 -0.0007 0" rpy="0 0 1.57" />
          <geometry>
@@ -79,15 +79,15 @@
    </transmission>
 
    <!-- gripper_2_link -->
-   <joint name="${prefix}gripper_prismatic_joint_2" type="prismatic">
+   <joint name="gripper_prismatic_joint_2" type="prismatic">
       <origin xyz="0 0 0" rpy="0 0 0" />
-      <parent link="${prefix}gripper_rail_link" />
-      <child link="${prefix}gripper_2_link" />
-      <mimic joint="${prefix}gripper_joint" />
+      <parent link="gripper_rail_link" />
+      <child link="gripper_2_link" />
+      <mimic joint="gripper_joint" />
       <axis xyz="0 1 0" />
       <limit lower="0.002" upper="0.031" effort="0" velocity="0.5" />
    </joint>
-   <link name="${prefix}gripper_2_link">
+   <link name="gripper_2_link">
       <visual>
          <origin xyz="0 0.0007 0" rpy="0 0 -1.57" />
          <geometry>
