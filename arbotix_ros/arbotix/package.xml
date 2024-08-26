@@ -13,11 +13,8 @@
   <run_depend>arbotix_python</run_depend>
   <run_depend>arbotix_sensors</run_depend>
   <run_depend>arbotix_controllers</run_depend>
-  <run_depend>arbotix_firmware</run_depend>
 
   <export>
     <metapackage/>
   </export>
 </package>
-
-
