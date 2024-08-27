@@ -28,7 +28,7 @@
 """
 
 import rospy, tf
-import thread
+# import thread
 
 from std_msgs.msg import Float64
 from sensor_msgs.msg import JointState

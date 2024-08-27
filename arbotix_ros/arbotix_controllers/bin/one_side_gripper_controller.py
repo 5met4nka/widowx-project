@@ -28,7 +28,7 @@
 """
 
 import rospy
-import thread
+# import thread
 
 from std_msgs.msg import Float64
 from math import asin

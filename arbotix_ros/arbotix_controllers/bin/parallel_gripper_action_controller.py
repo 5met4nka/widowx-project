@@ -28,7 +28,7 @@
 """
 
 import rospy, actionlib
-import thread
+# import thread
 
 from control_msgs.msg import GripperCommandAction
 from std_msgs.msg import Float64
