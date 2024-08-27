@@ -2,6 +2,7 @@
 <robot name="widowx_arm" xmlns:xacro="http://ros.org/wiki/xacro">
 
 	<xacro:include filename="$(find widowx_arm_description)/urdf/common_materials.xacro" />
+	<xacro:include filename="$(find widowx_arm_description)/urdf/widowx_gripper.xacro" />
 
 	<!-- base_link -->
 	<link name="base_footprint">
@@ -80,7 +81,7 @@
 	<!-- biceps_link -->
 	<joint name="joint_2" type="revolute">
 		<!--origin xyz="0.04825 0 0.14203" rpy="0 0 0" /-->
-		<origin xyz="0 0 0" rpy="0 0 0" />
+		<origin xyz="0 0 0" rpy="0 0.261799 0" />
 		<parent link="shoulder_link" />
 		<child link="biceps_link" />
 		<axis xyz="0 1 0" />
@@ -154,7 +155,7 @@
 
 	<!-- wrist_1_link -->
 	<joint name="joint_4" type="revolute">
-		<origin xyz="0 0 0.14203" rpy="0 0 0" />
+		<origin xyz="0 0 0.14203" rpy="0 0.0872665 0" />
 		<parent link="forearm_link" />
 		<child link="wrist_1_link" />
 		<axis xyz="0 1 0" />
@@ -227,6 +228,6 @@
 	</transmission>
 
 	<!-- gripper -->
-	<xacro:include filename="$(find widowx_arm_description)/urdf/widowx_gripper.xacro"/>
+	<xacro:widowx_gripper/>
 
 </robot>
