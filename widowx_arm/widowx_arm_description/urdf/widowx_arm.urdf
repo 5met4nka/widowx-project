@@ -3,9 +3,6 @@
 
 	<xacro:include filename="$(find widowx_arm_description)/urdf/common_materials.xacro" />
 
-	<xacro:property name="M_SCALE" value="0.001"/>
-	<xacro:property name="M_PI" value="3.14159"/>
-
 	<!-- base_link -->
 	<link name="base_footprint">
 		<visual>
@@ -45,7 +42,7 @@
 
 	<!-- shoulder_link -->
 	<joint name="joint_1" type="revolute">
-		<origin xyz="0 0 ${M_SCALE*125}" rpy="0 0 0" />
+		<origin xyz="0 0 0.125" rpy="0 0 0" />
 		<parent link="arm_base_link" />
 		<child link="shoulder_link" />
 		<axis xyz="0 0 1" />
@@ -120,7 +117,7 @@
 
 	<!-- forearm_link -->
 	<joint name="joint_3" type="revolute">
-		<origin xyz="${M_SCALE*48.25} 0 ${M_SCALE*142.03}" rpy="0 ${M_PI/2.0} 0" />
+		<origin xyz="0.04825 0 0.14203" rpy="0 1.570795 0" />
 		<parent link="biceps_link" />
 		<child link="forearm_link" />
 		<axis xyz="0 1 0" />
@@ -157,7 +154,7 @@
 
 	<!-- wrist_1_link -->
 	<joint name="joint_4" type="revolute">
-		<origin xyz="0 0 ${M_SCALE*142.03}" rpy="0 0 0" />
+		<origin xyz="0 0 0.14203" rpy="0 0 0" />
 		<parent link="forearm_link" />
 		<child link="wrist_1_link" />
 		<axis xyz="0 1 0" />
@@ -194,7 +191,7 @@
 
 	<!-- wrist_2_link -->
 	<joint name="joint_5" type="revolute">
-		<origin xyz="0 0 ${M_SCALE*71.5}" rpy="0 0 0" />
+		<origin xyz="0 0 0.0715" rpy="0 0 0" />
 		<parent link="wrist_1_link" />
 		<child link="wrist_2_link" />
 		<axis xyz="0 0 1" />

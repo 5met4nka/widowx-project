@@ -4,7 +4,7 @@
    <!-- gripper_rail_link -->
 
    <joint name="joint_6" type="fixed">
-      <origin xyz = "0 0 ${M_SCALE*43}" rpy="0 0 0" />
+      <origin xyz = "0 0 0.043" rpy="0 0 0" />
       <parent link="wrist_2_link" />
       <child link="gripper_rail_link" />
       <axis xyz="0 0 1" />

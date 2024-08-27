@@ -3,8 +3,8 @@
   <arg name="simulation" default="false"/>
   <arg name="sr300" default="false"/>
 
-  <param unless="$(arg sr300)" name="robot_description" command="$(find xacro)/xacro '$(find widowx_arm_description)/robots/widowx_arm.urdf.xacro'"/>
-  <param if="$(arg sr300)" name="robot_description" command="$(find xacro)/xacro '$(find widowx_arm_description)/robots/widowx_arm_sr300.urdf.xacro'"/>
+  <param unless="$(arg sr300)" name="robot_description" command="$(find xacro)/xacro '$(find widowx_arm_description)/urdf/widowx_arm.urdf'"/>
+  <param if="$(arg sr300)" name="robot_description" command="$(find xacro)/xacro '$(find widowx_arm_description)/urdf/widowx_arm_sr300.urdf'"/>
 
   <!-- <node name="robot_state_pub" pkg="robot_state_publisher" type="robot_state_publisher"/> -->
 
